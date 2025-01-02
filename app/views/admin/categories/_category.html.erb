@@ -1,12 +1,14 @@
-<div id="<%= dom_id category %>">
+<div id="<%= dom_id category %>" class="p-5 bg-white rounded-lg shadow-lg">
+  <div class="flex justify-center mb-6">
+    <%= image_tag category.image.variant(:thumb), class: "rounded-md" if category.image.attached? %>
+
+  </div>
   <p class="my-5">
-    <strong class="block font-medium mb-1">Name:</strong>
+    <strong class="block font-medium text-gray-700 mb-1">Name:</strong>
     <%= category.name %>
   </p>
-
   <p class="my-5">
-    <strong class="block font-medium mb-1">Description:</strong>
+    <strong class="block font-medium text-gray-700 mb-1">Description:</strong>
     <%= category.description %>
   </p>
-
 </div>
