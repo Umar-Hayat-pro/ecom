@@ -1,14 +1,15 @@
 <div class="w-full">
+  <%# content_for :title, "Products" %>
   <div class="flex justify-between items-center mb-8">
-    <h1 class="font-extrabold text-4xl text-gray-800">Categories</h1>
-    <%= link_to "New Category", new_admin_category_path, class: "rounded-lg py-3 px-6 bg-blue-600 text-white font-medium hover:bg-blue-700 transition duration-200 shadow-lg" %>
+    <h1 class="font-extrabold text-4xl text-gray-800">Products</h1>
+    <%= link_to "New product", new_admin_product_path, class: "rounded-lg py-3 px-6 bg-blue-600 text-white block font-medium hover:bg-blue-700 transition duration-200 shadow-lg" %>
   </div>
   <div class="flex flex-col w-full bg-white rounded-xl shadow-lg overflow-hidden">
     <div class="overflow-x-auto">
       <table class="min-w-full divide-y divide-gray-200">
         <thead class="bg-gray-100">
           <tr>
-             <th scope="col" class="text-sm font-semibold text-gray-700 px-6 py-4 text-left">
+            <th scope="col" class="text-sm font-semibold text-gray-700 px-6 py-4 text-left">
               Id
             </th>
             <th scope="col" class="text-sm font-semibold text-gray-700 px-6 py-4 text-left">
@@ -20,35 +21,47 @@
             <th scope="col" class="text-sm font-semibold text-gray-700 px-6 py-4 text-left">
               Description
             </th>
+             <th scope="col" class="text-sm font-semibold text-gray-700 px-6 py-4 text-left">
+              Price
+            </th>
+             <th scope="col" class="text-sm font-semibold text-gray-700 px-6 py-4 text-left">
+              Category
+            </th>
             <th scope="col" class="text-sm font-semibold text-gray-700 px-6 py-4 text-left">
               Action
             </th>
           </tr>
         </thead>
         <tbody class="bg-white divide-y divide-gray-200">
-          <% @admin_categories.each do |cat| %>
+          <% @admin_products.each do |p| %>
             <tr class="hover:bg-gray-50 transition duration-150">
               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 font-medium border-l border-r">
-                <%= cat.id %>
+                <%= p.id %>
               </td>
               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 font-medium border-l border-r">
-                <%= cat.image.present? ? image_tag(cat.image.variant(:thumb)) : image_tag("https://via.placeholder.com/50") %>
+                <%= p.images.any? ? image_tag(p.images.first.variant(:thumb)) : image_tag("https://via.placeholder.com/50") %>
               </td>
               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 font-medium border-l border-r">
-                <%= cat.name %>
+                <%= p.name %>
               </td>
               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600 border-l border-r">
-                <%= cat.description %>
+                <%= p.description %>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600 border-l border-r">
+                <%= "#{p.price}#{@currency}" %> 
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600 border-l border-r">
+                <%= p.category.name %>
               </td>
               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 font-medium border-l border-r">
                 <div class="flex items-center justify-center space-x-4">
-                  <%= link_to admin_category_path(cat), class: "text-blue-500 hover:text-blue-700 transition duration-150" do %>
+                  <%= link_to admin_product_path(p), class: "text-blue-500 hover:text-blue-700 transition duration-150" do %>
                     <i class="fas fa-eye text-lg" class="group-hover:w-6 group-hover:h-6 transition-all"></i>
                   <% end %>
-                  <%= link_to edit_admin_category_path(cat), class: "text-yellow-500 hover:text-yellow-600 transition duration-150" do %>
+                  <%= link_to edit_admin_product_path(p), class: "text-yellow-500 hover:text-yellow-600 transition duration-150" do %>
                     <i class="fas fa-edit text-lg"></i>
                   <% end %>
-                  <%= button_to admin_category_path(cat), method: :delete, data: { confirm: "Are you sure?" }, class: "text-red-500 hover:text-red-700 transition duration-150" do %>
+                  <%= button_to admin_product_path(p), method: :delete, data: { confirm: "Are you sure?" }, class: "text-red-500 hover:text-red-700 transition duration-150" do %>
                     <i class="fas fa-trash text-lg"></i>
                   <% end %>
                 </div>
@@ -60,4 +73,3 @@
     </div>
   </div>
 </div>
-
