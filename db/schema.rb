@@ -62,7 +62,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_01_02_082749) do
     t.string "name"
     t.text "description"
     t.integer "price"
-    t.integer "category_id", null: false
+    t.integer "category_id"
     t.boolean "active"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -71,5 +71,5 @@ ActiveRecord::Schema[7.1].define(version: 2025_01_02_082749) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "products", "categories"
+  add_foreign_key "products", "categories", on_delete: :nullify
 end

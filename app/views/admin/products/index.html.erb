@@ -51,7 +51,7 @@
                 <%= "#{p.price}#{@currency}" %> 
               </td>
               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600 border-l border-r">
-                <%= p.category.name %>
+                <%= p.category&.name || "No Category" %>
               </td>
               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 font-medium border-l border-r">
                 <div class="flex items-center justify-center space-x-4">
