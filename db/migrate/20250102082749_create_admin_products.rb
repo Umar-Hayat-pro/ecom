@@ -4,7 +4,7 @@ class CreateAdminProducts < ActiveRecord::Migration[7.1]
       t.string :name
       t.text :description
       t.integer :price
-      t.references :category, null: false, foreign_key: true
+      t.references :category, null: true, foreign_key: { on_delete: :nullify }
       t.boolean :active
 
       t.timestamps
